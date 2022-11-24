@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {{>header}}
+</head>
+
+<body>
+
+    {{>navbar}}
+
+
+    <div class="container-fluid main_header ">
+        <div class="row">
+            <div class="col-md-10 col-12 mx-auto">
+
+                <div class="main_content">
+                    <form class="temp_form">
+                        <input type="text" id="cityName" placeholder="Enter your city name" autocomplete="off">
+                        <input type="submit" value="🔍" id="submitBtn">
+
+                    </form>
+
+                </div>
+
+                <div class="tempInformation">
+                    <div class="top_layer">
+                        <p id="day">Tuesday</p>
+                        <p id="today_date">11 NOV</p>
+
+                    </div>
+                    <div class="main_layer">
+                        <p id="city_name">get output</p>
+                        <div class="middle_layer data_hide">
+                            <p id="temp"><span>0</span> <sup>o</sup>C</p>
+                            <p id="temp_status"><i class="fa fa-cloud" aria-hidden="true"></i></p>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{>footer}}
+
+    <script src="js/main.js"></script>
+    <script>
+        const day = document.getElementById("day")
+        const date = document.getElementById("today_date")
+        const getcurrentDay = () => {
+
+            let currenttime = new Date()
+            let weekday = new Array(7)
+            weekday[0] = "Monday"
+            weekday[1] = "Tueday"
+            weekday[2] = "Wednesday"
+            weekday[3] = "Thursday"
+            weekday[4] = "Friday"
+            weekday[5] = "Saturday"
+            weekday[6] = "Sunday"
+
+            let day = weekday[currenttime.getDay() - 1]
+            return day
+
+        }
+
+        const getcurrentTime = () => {
+            let now = new Date()
+            let months = [
+                "jan",
+                "feb",
+                "march",
+                "april",
+                "may",
+                "june",
+                "july",
+                "Aug",
+                "sep",
+                "Oct",
+                "Nov",
+                "Dec"
+            ]
+
+            let month = months[now.getMonth()]
+            let date = now.getDate()
+
+            let hours = now.getHours()
+            let minutes = now.getMinutes()
+
+            let periods = "AM"
+            if (hours > 11) {
+                periods = "PM"
+                if (hours > 12) hours -= 12
+            }
+
+            if (minutes < 10) {
+                minutes = "0" + minutes
+            }
+
+            return `${month} ${date} | ${hours}:${minutes} ${periods}`
+        }
+
+        day.innerHTML = getcurrentDay()
+        date.innerHTML = getcurrentTime()
+    </script>
+</body>
+
+</html>
